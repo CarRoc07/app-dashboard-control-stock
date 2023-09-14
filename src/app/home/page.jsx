@@ -5,6 +5,7 @@ import ProductInfo from "../../components/ProductInfo"
 import { UserContext } from "../../context/UserContext"
 import { useRouter } from 'next/navigation'
 import Modal from "../../components/Modal"
+import Image from "next/image"
 
 const loadProducts = async (token) => {
     try {
@@ -79,6 +80,18 @@ const HomePage = () => {
         }
     }
     , [search])
+
+    if(!auth) {
+        return (
+            <div className='flex flex-col items-center justify-center gap-7 h-[90vh]'>
+                <Image
+                src='/logo-menu-1.png' 
+                alt='Image' 
+                width={520} 
+                height={520} />
+            </div>
+        )
+    }
 
     return (
     <div className='max-w-7xl bg-slate-100 mx-auto py-5 flex flex-col items-center justify-center gap-10 w-full'>

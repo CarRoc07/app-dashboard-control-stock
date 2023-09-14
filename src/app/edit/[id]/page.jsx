@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import FormProduct from '../../../components/FormProduct'
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../../context/UserContext'
+import Image from 'next/image'
 
 const loadProduct = async (id, token) => {
     try {
@@ -21,6 +22,18 @@ const loadProduct = async (id, token) => {
 const page = async ({ params }) => {
     const { token, auth } = useContext(UserContext)
     const router = useRouter()
+
+    if(!auth) {
+        return (
+            <div className='flex flex-col items-center justify-center gap-7 h-[90vh]'>
+                <Image
+                src='/logo-menu-1.png' 
+                alt='Image' 
+                width={520} 
+                height={520} />
+            </div>
+        )
+    }
 
     useEffect(() => {
         if(!auth) {

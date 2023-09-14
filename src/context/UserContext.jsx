@@ -10,6 +10,30 @@ const UserProvider = ({children}) => {
     const [token, setToken] = useState(typeof window !== 'undefined' ? localStorage.getItem('token') || null : null)
     const router = useRouter()
 
+    const isTokenValid = async (tokenValid) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, { headers: { Authorization: `Bearer ${tokenValid}` } })
+            if(response.status === 200){
+                setToken(tokenValid);
+                setAuth(true);
+                router.push('/home')
+                return;
+            } else {
+                setAuth(false);
+                setToken(null);
+                localStorage.removeItem('token');
+                router.push('/')
+                return;
+            }
+        } catch (error) {
+            setAuth(false);
+            setToken(null);
+            localStorage.removeItem('token');
+            router.push('/')
+            return;
+        }
+    }
+
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if(!storedToken){
@@ -18,9 +42,7 @@ const UserProvider = ({children}) => {
             router.push('/')
             return;
         }
-        setToken(storedToken);
-        setAuth(true);
-        router.push('/home')
+        isTokenValid(storedToken);
     }, []);
 
     return (
