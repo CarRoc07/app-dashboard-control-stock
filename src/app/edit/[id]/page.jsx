@@ -10,9 +10,7 @@ import Image from 'next/image'
 const loadProduct = async (id, token) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/${id}`, { headers: {'Authorization': `Bearer ${token}`}})
-        console.log(response)
         const data = await response.json()
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)

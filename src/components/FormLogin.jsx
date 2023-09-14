@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 const FormLogin = () => {
     const { setAuth, setToken } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingFetch, setIsLoadingFetch] = useState(false);
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -22,6 +23,8 @@ const FormLogin = () => {
             return
         }
 
+        setIsLoadingFetch(true)
+
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
             method: 'POST',
@@ -35,9 +38,11 @@ const FormLogin = () => {
             localStorage.setItem('token', data.token)
             setToken(data.token)
             setAuth(true)
+            setIsLoadingFetch(false)
             router.push('/home')
         } catch (error) {
             console.log(error)
+            setIsLoadingFetch(false)
         }
     }
 
@@ -88,8 +93,22 @@ const FormLogin = () => {
             onChange={(e) => setValues({...values, password: e.target.value})}
             className='p-4 rounded-3xl outline-none' />
             <button 
-            className='bg-blue-600 text-white uppercase font-bold p-4 rounded-3xl w-[85%] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
-                Login
+            className='flex items-center justify-center bg-blue-600 text-white uppercase font-bold p-4 rounded-3xl w-[85%] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
+                {
+                    isLoadingFetch ?
+                    <Oval
+                    height={25}
+                    width={25}
+                    color="#fff"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="#fff"
+                    strokeWidth={4}
+                    strokeWidthSecondary={4}/> : 
+                    'Ingresar'
+                }
             </button>
             <Image 
             src='/logo-menu-1.png' 

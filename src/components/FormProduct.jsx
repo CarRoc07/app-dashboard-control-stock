@@ -3,10 +3,12 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import { UserContext } from '../context/UserContext'
 import { useRouter } from 'next/navigation'
+import { Oval } from 'react-loader-spinner'
 
 const FormProduct = ({ producto, params }) => {
     const { token } = useContext(UserContext);
     const router = useRouter()
+    const [isLoadingFetch, setIsLoadingFetch] = useState(false)
     const { product, stock, costo  } = producto || {};
 
     const [values, setValues] = useState({
@@ -17,6 +19,7 @@ const FormProduct = ({ producto, params }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        setIsLoadingFetch(true)
 
         try {
             if(params?.id) {
@@ -28,8 +31,9 @@ const FormProduct = ({ producto, params }) => {
                     },
                     body: JSON.stringify(values)
                 })
-
+                
                 router.push('/home')
+                setIsLoadingFetch(false)
 
                 return
             }
@@ -44,10 +48,11 @@ const FormProduct = ({ producto, params }) => {
             })
             
             router.push('/home')
-
+            setIsLoadingFetch(false)
             return
         } catch (error) {
             console.log(error)
+            setIsLoadingFetch(false)
         }
     }
 
@@ -57,8 +62,22 @@ const FormProduct = ({ producto, params }) => {
             <input className='p-4 rounded-3xl outline-none' type="text" placeholder='Producto' value={values.product} onChange={(e) => setValues({...values, product: e.target.value})} />
             <input className='p-4 rounded-3xl outline-none' type="number" placeholder='Stock' value={values.stock} onChange={(e) => setValues({...values, stock: Number(e.target.value)})} />
             <input className='p-4 rounded-3xl outline-none' type="number" placeholder='Precio costo' value={values.costo} onChange={(e) => setValues({...values, costo: Number(e.target.value)})} />
-            <button className='p-4 rounded-3xl bg-slate-100 text-xl text-blue-800 uppercase font-bold hover:bg-slate-300 transition-all duration-300' onClick={(e) => onSubmit(e)}>
-                Guardar
+            <button className='flex items-center justify-center p-4 rounded-3xl bg-slate-100 text-xl text-blue-800 uppercase font-bold hover:bg-slate-300 transition-all duration-300' onClick={(e) => onSubmit(e)}>
+            {
+                    isLoadingFetch ?
+                    <Oval
+                    height={25}
+                    width={25}
+                    color="rgb(30 64 175)"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="rgb(96 165 250)"
+                    strokeWidth={4}
+                    strokeWidthSecondary={4}/> : 
+                    'Ingresar'
+                }
             </button>
         </form>
     )
