@@ -21,10 +21,12 @@ const HomePage = () => {
     const router = useRouter()
     const { token, auth } = useContext(UserContext)
 
-    if(!auth) {
-        router.push('/')
-    }
-
+    useEffect(() => {
+        if(!auth) {
+            router.push('/')
+        }
+    }, [])
+    
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [limit, setLimit] = useState(10)

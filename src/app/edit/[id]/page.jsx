@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import FormProduct from '../../../components/FormProduct'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../../context/UserContext'
 
 const loadProduct = async (id, token) => {
@@ -22,9 +22,12 @@ const page = async ({ params }) => {
     const { token, auth } = useContext(UserContext)
     const router = useRouter()
 
-    if(!auth) {
-        router.push('/')
-    }
+    useEffect(() => {
+        if(!auth) {
+            router.push('/')
+            return
+        }
+    }, [auth])
 
     const producto = await loadProduct(params.id, token)
 
