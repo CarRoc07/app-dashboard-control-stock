@@ -7,8 +7,8 @@ const ProductInfo = ({ _id, product, stock, costo, openModal }) => {
     const router = useRouter()
 
     return (
-        <div className='flex flex-row items-center justify-center gap-32 border-b-2 border-t-2 w-full p-2'>
-            <p className='text-lg font-semibold w-[200px] overflow-x-hidden'> { product } </p>
+        <div className='flex flex-row items-center justify-center gap-32 border-b-2 border-t-2 w-full h-[85px] p-2'>
+            <p className='text-lg font-semibold w-[220px] overflow-x-hidden'> { product } </p>
             <p className='text-lg font-semibold w-[20px] text-center'> { stock } </p>
             <p className='text-lg font-semibold text-center w-[100px]'> ${costo} </p>
             <p className='text-lg font-semibold text-center w-[100px]'> ${Math.round(costo * 1.30)}  </p>
