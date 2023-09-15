@@ -85,13 +85,13 @@ const FormLogin = () => {
             placeholder='Email' 
             value={values.email} 
             onChange={(e) => setValues({...values, email: e.target.value})}
-            className='p-4 rounded-3xl outline-none' />
+            className='p-4 rounded-3xl outline-none text-lg' />
             <input 
             type="password" 
             placeholder='Password' 
             value={values.password} 
             onChange={(e) => setValues({...values, password: e.target.value})}
-            className='p-4 rounded-3xl outline-none' />
+            className='p-4 rounded-3xl outline-none text-lg' />
             <button 
             className='flex items-center justify-center bg-blue-600 text-white uppercase font-bold p-4 rounded-3xl w-[85%] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
                 {
