@@ -106,7 +106,7 @@ const HomePage = () => {
         <div className='flex flex-col items-center gap-5 w-full'>
             <h2 className='text-2xl font-bold uppercase'>Resultados</h2>
             <div className='flex flex-row items-center bg-blue-200 justify-center gap-32 border-b-2 border-t-2 w-full p-2'>
-                <p className='text-lg font-semibold w-[180px] overflow-x-hidden'> Producto </p>
+                <p className='text-lg font-semibold w-[200px] overflow-x-hidden'> Producto </p>
                 <p className='text-lg font-semibold w-[20px] text-center'> Stock </p>
                 <p className='text-lg font-semibold text-center w-[100px]'> Precio Costo </p>
                 <p className='text-lg font-semibold text-center w-[100px]'> Precio Venta  </p>
