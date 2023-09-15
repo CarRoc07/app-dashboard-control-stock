@@ -14,7 +14,7 @@ const UserProvider = ({children}) => {
 
     const isTokenValid = async (tokenValid) => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, { headers: { Authorization: `Bearer ${tokenValid}` } })
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/refresh`, { headers: { Authorization: `Bearer ${tokenValid}`} })
             if(response.status === 200){
                 setToken(tokenValid);
                 setAuth(true);
@@ -37,9 +37,9 @@ const UserProvider = ({children}) => {
     }
 
     const mostrarToast = () => {
-        toast.success('Producto agregado correctamente', {
+        toast.success('Producto guardado correctamente', {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 2000, // Tiempo en milisegundos antes de que se cierre automáticamente
+            autoClose: 2500,
         });
     };
 
