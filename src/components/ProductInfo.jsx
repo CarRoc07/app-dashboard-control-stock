@@ -1,14 +1,10 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri'
 
 const ProductInfo = ({ _id, product, stock, costo, openModal }) => {
     const router = useRouter()
-    const [loading, setLoading] = useState({
-        editLoading: false,
-        deleteLoading: false
-    })
 
     return (
         <div className='flex flex-row items-center justify-center gap-32 border-b-2 border-t-2 w-full p-2'>

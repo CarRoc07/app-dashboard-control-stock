@@ -115,7 +115,7 @@ const HomePage = () => {
             </div>
         <div className='flex flex-col items-center justify-center gap-2 w-full'>
         {
-            filteredProducts.slice(0, limit).map((product, index) => (
+            filteredProducts.slice((limit - 8), limit).map((product, index) => (
             <ProductInfo key={index} {...product} openModal={() => openModal(product._id)} />
             ))
         }
