@@ -30,7 +30,7 @@ const HomePage = () => {
     
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
-    const [limit, setLimit] = useState(10)
+    const [limit, setLimit] = useState(8)
     const [search, setSearch] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deleteProductId, setDeleteProductId] = useState(null);
@@ -123,14 +123,14 @@ const HomePage = () => {
         <div className='flex items-center justify-center gap-5'>
             <button 
             className='bg-blue-600 text-xl font-bold text-white py-2 px-4 rounded-lg disabled:bg-gray-400 hover:bg-blue-800' 
-            disabled={limit === 10} 
-            onClick={() => setLimit(limit - 10)}>
+            disabled={limit === 8} 
+            onClick={() => setLimit(limit - 8)}>
                 Prev
             </button>
             <button 
             className='bg-blue-600 text-xl font-bold text-white py-2 px-4 rounded-lg disabled:bg-gray-400 hover:bg-blue-800 ' 
-            disabled={limit === products.length} 
-            onClick={() => setLimit(limit + 10)}>
+            disabled={limit === filteredProducts.length} 
+            onClick={() => setLimit(limit + 8)}>
                 Next
             </button>
         </div>
