@@ -129,7 +129,7 @@ const HomePage = () => {
             </button>
             <button 
             className='bg-blue-600 text-xl font-bold text-white py-2 px-4 rounded-lg disabled:bg-gray-400 hover:bg-blue-800 ' 
-            disabled={limit === filteredProducts.length} 
+            disabled={limit >= filteredProducts.length} 
             onClick={() => setLimit(limit + 8)}>
                 Next
             </button>
