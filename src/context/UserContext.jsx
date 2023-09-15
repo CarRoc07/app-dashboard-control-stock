@@ -2,6 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserContext = createContext()
 
@@ -34,6 +36,13 @@ const UserProvider = ({children}) => {
         }
     }
 
+    const mostrarToast = () => {
+        toast.success('Producto agregado correctamente', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000, // Tiempo en milisegundos antes de que se cierre automáticamente
+        });
+    };
+
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if(!storedToken){
@@ -46,7 +55,7 @@ const UserProvider = ({children}) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ auth, setAuth, token, setToken }}>
+        <UserContext.Provider value={{ auth, setAuth, token, setToken, mostrarToast }}>
             {children}
         </UserContext.Provider>
     )

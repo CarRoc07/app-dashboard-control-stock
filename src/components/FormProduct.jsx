@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Oval } from 'react-loader-spinner'
 
 const FormProduct = ({ producto, params }) => {
-    const { token } = useContext(UserContext);
+    const { token, mostrarToast } = useContext(UserContext);
     const router = useRouter()
     const [isLoadingFetch, setIsLoadingFetch] = useState(false)
     const { product, stock, costo  } = producto || {};
@@ -34,6 +34,7 @@ const FormProduct = ({ producto, params }) => {
                 
                 router.push('/home')
                 setIsLoadingFetch(false)
+                mostrarToast()
 
                 return
             }
@@ -49,6 +50,7 @@ const FormProduct = ({ producto, params }) => {
             
             router.push('/home')
             setIsLoadingFetch(false)
+            mostrarToast()
             return
         } catch (error) {
             console.log(error)
@@ -76,7 +78,7 @@ const FormProduct = ({ producto, params }) => {
                     secondaryColor="rgb(96 165 250)"
                     strokeWidth={4}
                     strokeWidthSecondary={4}/> : 
-                    'Ingresar'
+                    'Guardar'
                 }
             </button>
         </form>

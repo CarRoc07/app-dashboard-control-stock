@@ -6,6 +6,7 @@ import { UserContext } from "../../context/UserContext"
 import { useRouter } from 'next/navigation'
 import Modal from "../../components/Modal"
 import Image from "next/image"
+import { ToastContainer } from "react-toastify"
 
 const loadProducts = async (token) => {
     try {
@@ -135,6 +136,7 @@ const HomePage = () => {
         </div>
         </div>
         <Modal isOpen={isModalOpen} onClose={closeModal} onConfirm={handleDelete} productId={deleteProductId} />
+        <ToastContainer />
     </div>
     )
 }
