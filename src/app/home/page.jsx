@@ -114,11 +114,11 @@ const HomePage = () => {
                 <p className='text-lg font-semibold w-[120px]'> Actions </p>
             </div>
         <div className='flex flex-col items-center justify-center gap-2 w-full'>
-            {
-                filteredProducts.map((product, index) => (
-                    index < limit ? <ProductInfo key={index} {...product} openModal={() => openModal(product._id)} /> : null
-                ))
-            }
+        {
+            filteredProducts.slice(0, limit).map((product, index) => (
+            <ProductInfo key={index} {...product} openModal={() => openModal(product._id)} />
+            ))
+        }
         </div>
         <div className='flex items-center justify-center gap-5'>
             <button 
