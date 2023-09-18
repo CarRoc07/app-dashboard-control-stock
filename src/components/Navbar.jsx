@@ -1,23 +1,22 @@
 'use client'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import ModalAddPrice from './ModalAddPrice'
+
+const ACTIONS = {
+    ADD: "add",
+    SUB: "sub"
+}
 
 const Navbar = () => {
+    const [openModal, setOpenModal] = useState(false)
+    const [action, setAction] = useState(ACTIONS.ADD)
     const router = useRouter()
 
-    const addPriceToProducts = async () => {
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/update`, {
-                method: 'PUT',
-                headers: { Authorization: `Bearer ${tokenValid}`}
-            })
-            router.push('/home')
-            return;
-        } catch (error) {
-            console.log(error)
-            return;
-        }
+    const setModalInfo = (action) => {
+        setAction(action)
+        setOpenModal(true)
     }
 
     return (
@@ -28,12 +27,15 @@ const Navbar = () => {
                     <button className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800' onClick={() => router.push('/add')}>
                         Añadir producto
                     </button>
-                    <button className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800' onClick={() => addPriceToProducts()}>
-                        Sumar 5%
+                    <button className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800' onClick={() => setModalInfo(ACTIONS.ADD)}>
+                        Sumar a todos
+                    </button>
+                    <button className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800' onClick={() => setModalInfo(ACTIONS.SUB)}>
+                        Restar a todos
                     </button>
                 </div>
-                
             </nav>
+            <ModalAddPrice isOpen={openModal} action={action} close={() => setOpenModal(false)} />
         </div>
         
     )
