@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar'
 import './globals.css'
 import { Roboto } from 'next/font/google'
 import UserProvider from '../context/UserContext'
+import ButtonLogout from '../components/ButtonLogout'
+import ModalLogout from '../components/ModalLogout'
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] })
 
@@ -17,6 +19,8 @@ export default function RootLayout({ children }) {
         <UserProvider>
           <Navbar />
           {children}
+          <ButtonLogout />
+          <ModalLogout />
         </UserProvider>
       </body>
     </html>

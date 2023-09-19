@@ -59,12 +59,28 @@ const FormProduct = ({ producto, params }) => {
     }
 
     return (
-        <form className='flex flex-col gap-10 bg-blue-600 p-8 rounded-xl w-[400px] shadow-3xl'>
-            <h1 className='text-2xl font-bold uppercase text-white text-center py-2 border-t-2 border-b-2'>{params ? 'Editar Producto' : 'Crear Producto'}</h1>
-            <input className='p-4 rounded-3xl outline-none' type="text" placeholder='Producto' value={values.product} onChange={(e) => setValues({...values, product: e.target.value})} />
-            <input className='p-4 rounded-3xl outline-none' type="number" placeholder='Stock' value={values.stock} onChange={(e) => setValues({...values, stock: Number(e.target.value)})} />
-            <input className='p-4 rounded-3xl outline-none' type="number" placeholder='Precio costo' value={values.costo} onChange={(e) => setValues({...values, costo: Number(e.target.value)})} />
-            <button className='flex items-center justify-center p-4 rounded-3xl bg-slate-100 text-xl text-blue-800 uppercase font-bold hover:bg-slate-300 transition-all duration-300' onClick={(e) => onSubmit(e)}>
+        <form className='flex flex-col items-center gap-10 bg-slate-50 p-10 rounded-xl w-[420px] shadow-3xl border-r-8 border-b-8 border-blue-500'>
+            <input 
+                className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-lg w-[300px] focus:border-blue-500' 
+                type="text" 
+                placeholder='Producto' 
+                value={values.product} 
+                onChange={(e) => setValues({...values, product: e.target.value})} />
+            <input 
+                className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-lg w-[300px] focus:border-blue-500' 
+                type="number" 
+                placeholder='Stock' 
+                value={values.stock} 
+                onChange={(e) => setValues({...values, stock: Number(e.target.value)})} />
+            <input 
+                className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-lg w-[300px] focus:border-blue-500' 
+                type="number" 
+                placeholder='Precio costo' 
+                value={values.costo} 
+                onChange={(e) => setValues({...values, costo: Number(e.target.value)})} />
+            <button 
+                className='flex items-center justify-center border-b-4 w-[220px] border-blue-400 p-4 rounded-3xl shadow-md bg-slate-100 text-xl text-blue-600 uppercase font-bold hover:bg-slate-300 transition-all duration-300' 
+                onClick={(e) => onSubmit(e)}>
             {
                     isLoadingFetch ?
                     <Oval

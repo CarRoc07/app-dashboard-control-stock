@@ -10,6 +10,7 @@ export const UserContext = createContext()
 const UserProvider = ({children}) => {
     const [auth, setAuth] = useState(false)
     const [token, setToken] = useState(typeof window !== 'undefined' ? localStorage.getItem('token') || null : null)
+    const [openModalLogout, setOpenModalLogout] = useState(false)
     const router = useRouter()
 
     const isTokenValid = async (tokenValid) => {
@@ -55,7 +56,7 @@ const UserProvider = ({children}) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ auth, setAuth, token, setToken, mostrarToast }}>
+        <UserContext.Provider value={{ auth, setAuth, token, setToken, mostrarToast, openModalLogout, setOpenModalLogout }}>
             {children}
         </UserContext.Provider>
     )

@@ -9,6 +9,7 @@ const FormLogin = () => {
     const { setAuth, setToken } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingFetch, setIsLoadingFetch] = useState(false);
+    const [errors, setErrors] = useState(false)
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -27,14 +28,19 @@ const FormLogin = () => {
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
             })
+            console.log(response)
+            if(response.status !== 200 || response.status !== 204) {
+                setErrors(true)
+                setIsLoadingFetch(false)
+                return
+            }
             const data = await response.json()
-            if(!data.token) return console.log('Error en el servidor')
             localStorage.setItem('token', data.token)
             setToken(data.token)
             setAuth(true)
@@ -43,6 +49,7 @@ const FormLogin = () => {
         } catch (error) {
             console.log(error)
             setIsLoadingFetch(false)
+            setErrors(true)
         }
     }
 
@@ -79,7 +86,7 @@ const FormLogin = () => {
 
     return (
         <form className='flex flex-col items-center rounded-br-xl rounded-tl-xl justify-center p-8 shadow-xl gap-7 bg-slate-50'>
-            <h1 className='text-7xl font-bold text-blue-600 text-center py-2 border-t-2 border-b-2 uppercase'>Accedé</h1>
+            <h1 className='text-6xl font-bold text-blue-600 text-center py-2 border-t-2 border-b-2 uppercase'>Accedé</h1>
             <input 
                 type="text" 
                 placeholder='Email' 
@@ -92,29 +99,35 @@ const FormLogin = () => {
                 value={values.password} 
                 onChange={(e) => setValues({...values, password: e.target.value})}
                 className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-xl w-[300px] focus:border-blue-500' />
-            <button 
-            className='flex items-center text-3xl justify-center bg-blue-500 text-white uppercase font-semibold p-3 transition-all rounded-xl w-[300px] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
+            <div className='flex items-center flex-col gap-3'>
+                <button 
+                    className='flex items-center text-3xl justify-center bg-blue-500 text-white uppercase font-semibold p-3 transition-all rounded-xl w-[300px] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
+                    {
+                        isLoadingFetch ?
+                        <Oval
+                        height={30}
+                        width={30}
+                        color="#fff"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel='oval-loading'
+                        secondaryColor="#fff"
+                        strokeWidth={4}
+                        strokeWidthSecondary={4}/> : 
+                        'Ingresar'
+                    }
+                </button>
                 {
-                    isLoadingFetch ?
-                    <Oval
-                    height={30}
-                    width={30}
-                    color="#fff"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                    visible={true}
-                    ariaLabel='oval-loading'
-                    secondaryColor="#fff"
-                    strokeWidth={4}
-                    strokeWidthSecondary={4}/> : 
-                    'Ingresar'
+                    errors && 
+                    <p className='text-red-500 text-center font-medium'>Contraseña o email incorrectos</p>
                 }
-            </button>
-            <Image 
-            src='/logo-menu-1.png' 
-            alt='Image' 
-            width={400} 
-            height={400} />
+                <Image 
+                    src='/logo-menu-1.png' 
+                    alt='Image' 
+                    width={400} 
+                    height={400} />
+            </div>
         </form>
     )
 }
