@@ -35,7 +35,7 @@ const FormLogin = () => {
                 body: JSON.stringify(values)
             })
             console.log(response)
-            if(response.status !== 200 || response.status !== 204) {
+            if(response.status !== 200 && response.status !== 204) {
                 setErrors(true)
                 setIsLoadingFetch(false)
                 return
