@@ -46,13 +46,13 @@ const ModalAddPrice = ({ isOpen, action, close }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="flex flex-col items-center justify-around border-1 border-blue-500 bg-white w-96 p-4 h-[200px] rounded-lg shadow-md">
-                <p className='text-lg font-semibold text-center w-[250px] overflow-x-hidden'>
-                    Ingrese porcentaje a { action === 'add' ? 'sumar' : 'restar' }
+            <div className="flex flex-col items-center border-2 border-gray-300 justify-around bg-white w-96 p-4 h-[250px] rounded-lg shadow-md">
+                <p className='text-2xl font-bold text-center overflow-x-hidden'>
+                    Porcentaje a { action === 'add' ? 'sumar' : 'restar' }
                 </p>
-                <input type="text" placeholder='Porcentaje..' value={value.inputValue} onChange={(e) => setValue({...value, inputValue: e.target.value})} />
-                <div className='flex items-center justify-center gap-3'>
-                    <button className='bg-blue-600 flex items-center justify-center text-white w-[120px] py-2 px-3 rounded-lg hover:bg-blue-800' onClick={sendData}>
+                <input type="text" placeholder='Porcentaje.. %' className='rounded-md outline-none text-lg text-center p-2 border-2 border-gray-400' value={value.inputValue} onChange={(e) => setValue({...value, inputValue: e.target.value})} />
+                <div className='flex items-center justify-center gap-4'>
+                    <button className='bg-blue-600 flex items-center justify-center text-lg text-white w-[120px] py-2 px-3 rounded-lg hover:bg-blue-800' onClick={sendData}>
                     {
                     loading ?
                     <Oval
@@ -69,7 +69,7 @@ const ModalAddPrice = ({ isOpen, action, close }) => {
                     'Aceptar'
                 }
                     </button>
-                    <button className='bg-blue-600 text-white w-[120px] py-2 px-3 rounded-lg hover:bg-blue-800' onClick={() => close()}>
+                    <button className='bg-blue-600 text-white w-[120px] text-lg py-2 px-3 rounded-lg hover:bg-blue-800' onClick={() => close()}>
                     Cancelar
                     </button>
                 </div>

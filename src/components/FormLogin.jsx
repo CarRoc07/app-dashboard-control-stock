@@ -65,12 +65,12 @@ const FormLogin = () => {
                 <Oval
                 height={50}
                 width={50}
-                color="rgb(29 78 216)"
+                color="#fff"
                 wrapperStyle={{}}
                 wrapperClass=""
                 visible={true}
                 ariaLabel='oval-loading'
-                secondaryColor="#fff"
+                secondaryColor="rgb(37 99 235)"
                 strokeWidth={5}
                 strokeWidthSecondary={5}/>
             </div>
@@ -78,27 +78,27 @@ const FormLogin = () => {
     }
 
     return (
-        <form className='flex flex-col items-center justify-center gap-7'>
-            <h1 className='text-5xl font-bold text-blue-700 uppercase text-center py-2 border-t-2 border-b-2'>Login</h1>
+        <form className='flex flex-col items-center rounded-br-xl rounded-tl-xl justify-center p-8 shadow-xl gap-7 bg-slate-50'>
+            <h1 className='text-7xl font-bold text-blue-600 text-center py-2 border-t-2 border-b-2 uppercase'>Accedé</h1>
             <input 
-            type="text" 
-            placeholder='Email' 
-            value={values.email} 
-            onChange={(e) => setValues({...values, email: e.target.value})}
-            className='p-4 rounded-3xl outline-none text-lg' />
+                type="text" 
+                placeholder='Email' 
+                value={values.email} 
+                onChange={(e) => setValues({...values, email: e.target.value})}
+                className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-xl w-[300px] focus:border-blue-500' />
             <input 
-            type="password" 
-            placeholder='Password' 
-            value={values.password} 
-            onChange={(e) => setValues({...values, password: e.target.value})}
-            className='p-4 rounded-3xl outline-none text-lg' />
+                type="password" 
+                placeholder='Password' 
+                value={values.password} 
+                onChange={(e) => setValues({...values, password: e.target.value})}
+                className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-xl w-[300px] focus:border-blue-500' />
             <button 
-            className='flex items-center justify-center bg-blue-600 text-white uppercase font-bold p-4 rounded-3xl w-[85%] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
+            className='flex items-center text-3xl justify-center bg-blue-500 text-white uppercase font-semibold p-3 transition-all rounded-xl w-[300px] hover:bg-blue-700' onClick={(e) => onSubmit(e)}>
                 {
                     isLoadingFetch ?
                     <Oval
-                    height={25}
-                    width={25}
+                    height={30}
+                    width={30}
                     color="#fff"
                     wrapperStyle={{}}
                     wrapperClass=""
@@ -113,8 +113,8 @@ const FormLogin = () => {
             <Image 
             src='/logo-menu-1.png' 
             alt='Image' 
-            width={320} 
-            height={320} />
+            width={400} 
+            height={400} />
         </form>
     )
 }
