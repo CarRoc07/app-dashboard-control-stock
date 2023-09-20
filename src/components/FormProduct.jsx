@@ -59,7 +59,7 @@ const FormProduct = ({ producto, params }) => {
     }
 
     return (
-        <form className='flex flex-col items-center gap-10 bg-slate-50 p-10 rounded-xl w-[420px] shadow-3xl border-r-8 border-b-8 border-blue-500'>
+        <form className='flex flex-col items-center gap-7 bg-slate-50 p-7 rounded-xl w-[420px] shadow-3xl border-r-8 border-b-8 border-blue-500'>
             <input 
                 className='p-4 rounded-t-xl border-b-4 bg-slate-100 border-blue-200 font-medium outline-none text-lg w-[300px] focus:border-blue-500' 
                 type="text" 
