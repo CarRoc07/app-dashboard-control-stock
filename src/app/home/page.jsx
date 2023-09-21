@@ -106,7 +106,25 @@ const HomePage = () => {
             placeholder='Nombre producto ...' 
             className='border-2 border-gray-400 text-xl p-2 rounded-3xl w-[350px] text-center'
             value={search}
-            onChange={(e) => setSearch(e.target.value.trim())} />
+            onChange={(e) => {
+                setSearch(e.target.value.trim())
+                setPage(1)
+            }} />
+        </div>
+        <div>
+            <input
+                type="checkbox"
+                id="stockFilter"
+                className="mr-2"
+                onChange={(e) => {
+                    if (e.target.checked) {
+                        setFilteredProducts(filteredProducts.filter((producto) => producto.stock === 0));
+                    } else {
+                        setFilteredProducts(products);
+                    }
+                }}
+                />
+            <label htmlFor="stockFilter">Mostrar solo productos sin stock</label>
         </div>
         <div className='flex flex-col items-center gap-5 w-full'>
             <div className="flex items-center justify-between w-full">
@@ -137,7 +155,7 @@ const HomePage = () => {
         <div className='flex items-center justify-center gap-5'>
             <button 
             className='bg-blue-600 text-2xl font-bold text-white py-2 px-5 rounded-lg disabled:bg-gray-400 hover:bg-blue-800' 
-            disabled={limit === 8} 
+            disabled={limit === 8 || page === 1} 
             onClick={() => { 
                 setLimit(limit - 8)
                 setPage(prev => prev - 1)
